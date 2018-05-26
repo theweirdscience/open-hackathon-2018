@@ -7,15 +7,7 @@ import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 export class ProfileDialogComponent {
 
   constructor(
-    public dialogRef: MatDialog,
     @Inject(MAT_DIALOG_DATA) public data: any) {
-
-  }
-
-  onNoClick(): void {
-
-    this.dialogRef.close();
-
   }
 
 }
