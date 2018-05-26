@@ -1,5 +1,5 @@
 <mat-list role="list">
-  <mat-list-item *ngFor="let selectedIntegrations of integrations | async" role="listitem">
+  <mat-list-item *ngFor="let integration of chosenSelected" role="listitem">
     {{ integration.service }} <button mat-button> - </button>
   </mat-list-item>
 </mat-list>

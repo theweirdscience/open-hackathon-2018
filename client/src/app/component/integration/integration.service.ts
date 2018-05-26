@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, from } from 'rxjs';
+import { Observable, of, from, BehaviorSubject, Subject } from 'rxjs';
+import { tap, map, scan } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,7 @@ import { Observable, of, from } from 'rxjs';
 export class IntegrationService {
 
   public intergrationsPossibilities: Observable<any[]>;
+  selectedServices: any = [];
 
   private integrations = [
     {

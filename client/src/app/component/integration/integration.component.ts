@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, AfterViewChecked, OnChanges } from '@angular/core';
 import { IntegrationService } from './integration.service';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { IntegrationDialogComponent } from './integration-dialog.component';
@@ -9,9 +9,13 @@ import { IntegrationDialogComponent } from './integration-dialog.component';
 })
 export class IntegrationComponent {
 
-  public integrations: any;
+  chosenSelected: any;
 
-  constructor(public dialog: MatDialog) {
+  constructor(
+    private integrationService: IntegrationService,
+    public dialog: MatDialog) {
+
+    this.chosenSelected = this.integrationService.selectedServices;
 
   }
 
