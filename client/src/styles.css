@@ -1,1 +1,14 @@
-/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+.example-container {
+  display: flex;
+  flex-direction: column;
+}
+
+section {
+  padding: 5rem 10rem;
+  border-bottom: 1px solid #eee;
+}
+
+img.big-burd {
+  width: 100px;
+}
