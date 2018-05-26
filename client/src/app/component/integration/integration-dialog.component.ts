@@ -22,7 +22,6 @@ export class IntegrationDialogComponent {
     if (stuff) {
 
       this.integrationService.selectedServices.push(thingy);
-      console.log(this.integrationService.selectedServices);
 
     } else {
 

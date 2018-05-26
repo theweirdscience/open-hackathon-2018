@@ -1,5 +1,5 @@
 <mat-list role="list">
-  <mat-list-item role="listitem">Item 1 <button mat-button> - </button> </mat-list-item>
-  <mat-list-item role="listitem">Item 2 <button mat-button> - </button> </mat-list-item>
-  <mat-list-item role="listitem">Item 3 <button mat-button> - </button> </mat-list-item>
+  <mat-list-item *ngFor="let integration of chosenSelected" role="listitem">
+    <img width="40" style="padding-right: 20px" [src]="integration.image" alt="">{{ integration.label }}
+  </mat-list-item>
 </mat-list>
