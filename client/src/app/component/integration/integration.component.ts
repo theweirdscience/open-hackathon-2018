@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IntegrationService } from './integration.service';
 
 @Component({
   selector: 'app-integration',
@@ -8,19 +9,9 @@ export class IntegrationComponent {
 
   public integrations: any;
 
-  constructor() {
+  constructor(private integrationService: IntegrationService) {
 
-    this.integrations = [
-      {
-        service: 'kpn',
-      },
-      {
-        service: 'politie'
-      },
-      {
-        service: 'Kadester'
-      }
-    ];
+    this.integrations = this.integrationService.intergrationsPossibilities;
 
   }
 

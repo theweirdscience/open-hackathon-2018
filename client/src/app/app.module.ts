@@ -21,6 +21,7 @@ import { SubscriptionComponent } from './component/subscription/subscription.com
 import { IntegrationComponent } from './component/integration/integration.component';
 import { ButtonComponent } from './component/button/button.component';
 import { EncryptionService } from './service/encryption.service';
+import { IntegrationService } from './component/integration/integration.service';
 
 @NgModule({
   declarations: [
@@ -45,7 +46,7 @@ import { EncryptionService } from './service/encryption.service';
     BrowserAnimationsModule,
     BrowserModule
   ],
-  providers: [EncryptionService],
+  providers: [EncryptionService, IntegrationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

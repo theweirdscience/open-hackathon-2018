@@ -1,5 +1,5 @@
 <mat-list role="list">
-  <mat-list-item *ngFor="let integration of integrations" role="listitem">
+  <mat-list-item *ngFor="let integration of integrations | async" role="listitem">
     {{ integration.service }}
   </mat-list-item>
 </mat-list>
