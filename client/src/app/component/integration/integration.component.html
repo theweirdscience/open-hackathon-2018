@@ -2,9 +2,6 @@
   <mat-list-item *ngFor="let selectedIntegrations of integrations | async" role="listitem">
     {{ integration.service }} <button mat-button> - </button>
   </mat-list-item>
-
 </mat-list>
 
-<button mat-button (click)="openDialog()">
-  <mat-icon> + </mat-icon>
-</button>
+<button mat-raised-button (click)="openDialog()">+</button>
