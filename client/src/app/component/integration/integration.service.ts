@@ -10,15 +10,18 @@ export class IntegrationService {
 
   private integrations = [
     {
-      service: 'kpn',
-      url: 'kpn url'
+      service: 'post_nl',
+      label: 'Post NL',
+      url: 'post nl url'
     },
     {
       service: 'politie',
+      label: 'Politie',
       url: 'politie url'
     },
     {
-      service: 'Kadester',
+      service: 'kadester',
+      label: 'Kadester',
       url: 'kadester url'
     }
   ];

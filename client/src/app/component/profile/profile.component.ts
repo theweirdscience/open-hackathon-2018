@@ -16,7 +16,7 @@ export class ProfileComponent {
 
   openDialog(): void {
     this.dialog.open(ProfileDialogComponent, {
-      width: '250px',
+      width: '400px',
       data: { name: 'some name', animal: 'tiger' }
     });
   }

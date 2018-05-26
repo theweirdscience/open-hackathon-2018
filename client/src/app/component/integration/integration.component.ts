@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { IntegrationService } from './integration.service';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { IntegrationDialogComponent } from './integration-dialog.component';
 
 @Component({
   selector: 'app-integration',
@@ -9,10 +11,15 @@ export class IntegrationComponent {
 
   public integrations: any;
 
-  constructor(private integrationService: IntegrationService) {
+  constructor(public dialog: MatDialog) {
 
-    this.integrations = this.integrationService.intergrationsPossibilities;
+  }
 
+  openDialog(): void {
+    this.dialog.open(IntegrationDialogComponent, {
+      width: '400px',
+      data: { name: 'some name', animal: 'tiger' }
+    });
   }
 
 }

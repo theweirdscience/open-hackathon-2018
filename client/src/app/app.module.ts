@@ -5,6 +5,8 @@ import {
   MatCardModule,
   MatGridListModule,
   MatIconModule,
+  MatSlideToggleModule,
+  MatSliderModule,
   MatFormFieldModule,
   MatToolbarModule,
   MatOptionModule,
@@ -26,6 +28,7 @@ import { ButtonComponent } from './component/button/button.component';
 import { EncryptionService } from './service/encryption.service';
 import { IntegrationService } from './component/integration/integration.service';
 import { ProfileDialogComponent } from './component/profile/profile-dialog.component';
+import { IntegrationDialogComponent } from './component/integration/integration-dialog.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,7 @@ import { ProfileDialogComponent } from './component/profile/profile-dialog.compo
     EditDirective,
     ProfileDialogComponent,
     SubscriptionComponent,
+    IntegrationDialogComponent,
     IntegrationComponent,
     ButtonComponent
   ],
@@ -41,19 +45,21 @@ import { ProfileDialogComponent } from './component/profile/profile-dialog.compo
     MatListModule,
     MatInputModule,
     MatFormFieldModule,
+    MatSliderModule,
     MatCardModule,
     MatButtonModule,
     MatDialogModule,
     MatOptionModule,
     MatIconModule,
     MatGridListModule,
+    MatSlideToggleModule,
     MatSelectModule,
     MatToolbarModule,
     MatCheckboxModule,
     BrowserAnimationsModule,
     BrowserModule
   ],
-  entryComponents: [ProfileDialogComponent],
+  entryComponents: [ProfileDialogComponent, IntegrationDialogComponent],
   providers: [EncryptionService, IntegrationService],
   bootstrap: [AppComponent]
 })
