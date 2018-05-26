@@ -15,7 +15,7 @@ export class EncryptionService {
 
     const publicKey = cryptico.publicKeyString(privateKey);
 
-    console.log(publicKey)
+    console.log(publicKey);
 
   }
 
