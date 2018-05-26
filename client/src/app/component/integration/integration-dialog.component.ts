@@ -26,13 +26,16 @@ export class IntegrationDialogComponent {
 
     } else {
 
-      this.integrationService.selectedServices = this.integrationService.selectedServices
-        .filter((otherstuff) => otherstuff.label !== thingy.label)
-        .map((x) => {
-          console.log(x);
-          return x;
-        });
+      this.integrationService.selectedServices
+        .forEach((otherstuff, index) => {
 
+          if (thingy && otherstuff && otherstuff.label === thingy.label) {
+
+            this.integrationService.selectedServices.splice(index, 1);
+
+          }
+
+        });
     }
 
   }
