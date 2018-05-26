@@ -20,6 +20,7 @@ import { EditDirective } from './directive/edit.directive';
 import { SubscriptionComponent } from './component/subscription/subscription.component';
 import { IntegrationComponent } from './component/integration/integration.component';
 import { ButtonComponent } from './component/button/button.component';
+import { EncryptionService } from './service/encryption.service';
 
 @NgModule({
   declarations: [
@@ -44,7 +45,7 @@ import { ButtonComponent } from './component/button/button.component';
     BrowserAnimationsModule,
     BrowserModule
   ],
-  providers: [],
+  providers: [EncryptionService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
