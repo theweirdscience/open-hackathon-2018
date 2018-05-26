@@ -1,5 +1,7 @@
 <mat-list role="list">
-  <mat-list-item role="listitem">Item 1</mat-list-item>
-  <mat-list-item role="listitem">Item 2</mat-list-item>
-  <mat-list-item role="listitem">Item 3</mat-list-item>
+  <mat-list-item *ngFor="let integration of integrations" role="listitem">
+    {{ integration.service }}
+  </mat-list-item>
 </mat-list>
+
+<button mat-raised-button> + </button>

@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditDirective } from './directive/edit.directive';
 import { SubscriptionComponent } from './component/subscription/subscription.component';
 import { IntegrationComponent } from './component/integration/integration.component';
+import { ButtonComponent } from './component/button/button.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { IntegrationComponent } from './component/integration/integration.compon
     ProfileComponent,
     EditDirective,
     SubscriptionComponent,
-    IntegrationComponent
+    IntegrationComponent,
+    ButtonComponent
   ],
   imports: [
     MatListModule,
