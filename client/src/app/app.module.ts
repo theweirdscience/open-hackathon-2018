@@ -24,7 +24,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { EditDirective } from './directive/edit.directive';
 import { SubscriptionComponent } from './component/subscription/subscription.component';
 import { IntegrationComponent } from './component/integration/integration.component';
-import { ButtonComponent } from './component/button/button.component';
 import { EncryptionService } from './service/encryption.service';
 import { IntegrationService } from './component/integration/integration.service';
 import { ProfileDialogComponent } from './component/profile/profile-dialog.component';
@@ -39,7 +38,6 @@ import { IntegrationDialogComponent } from './component/integration/integration-
     SubscriptionComponent,
     IntegrationDialogComponent,
     IntegrationComponent,
-    ButtonComponent
   ],
   imports: [
     MatListModule,
