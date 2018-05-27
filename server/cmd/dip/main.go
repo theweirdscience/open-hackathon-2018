@@ -142,7 +142,7 @@ func main() {
 
   // create the server
   server := &http.Server{
-    Addr:    "localhost:8000",
+    Addr:    ":80",
     Handler: r,
   }
 

@@ -18,6 +18,7 @@ import (
   "crypto/sha256"
   "encoding/hex"
   "crypto/rand"
+  "bytes"
 )
 
 type Hash string
@@ -64,7 +65,7 @@ func Last(parts []string) string {
 }
 
 func GetPublicKey(hash Hash) PublicKey {
-  response, err := http.Get(fmt.Sprintf("http://%v.digital-identity-protocol.nl/key", ))
+  response, err := http.Get(fmt.Sprintf("http://%v.live.digital-identity-protocol.nl/key", ))
   if err != nil {
     logr.Error(err)
     return PublicKey("")
@@ -80,7 +81,7 @@ func GetPublicKey(hash Hash) PublicKey {
 
 func GetData(hash Hash) Data {
   var data Data
-  response, err := http.Get(fmt.Sprintf("http://%v.digital-identity-protocol.nl/key", ))
+  response, err := http.Get(fmt.Sprintf("http://%v.live.digital-identity-protocol.nl/key", ))
   if err != nil {
     logr.Error(err)
     return data
@@ -161,11 +162,35 @@ func main() {
     w.WriteHeader(http.StatusNotImplemented)
   })
 
+  r.HandleFunc("/dip/send-message/*", func(w http.ResponseWriter, r *http.Request) {
+    //recipient := Hash(Last(strings.SplitN(r.URL.Path, "/", -1)))
+
+    var jsonStr = []byte(`{"messages": [{"content": "Hi Big Bird!","mobile_number": "+31636164164"}],"sender": "Digital Identity Platform Integration"}`)
+    req, err := http.NewRequest("POST", "https://api-prd.kpn.com/messaging/sms-kpn/v1/send", bytes.NewBuffer(jsonStr))
+    req.Header.Set("Authorization", "BearerToken qKlWVXAEI1l56Gw1qGx3UfL3TjNy")
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    if err != nil {
+      panic(err)
+    }
+    defer resp.Body.Close()
+
+    logr.Info("response Status:", resp.Status)
+    logr.Info("response Headers:", resp.Header)
+    body, _ := ioutil.ReadAll(resp.Body)
+    logr.Info("response Body:", string(body))
+
+    w.WriteHeader(resp.StatusCode)
+
+  })
+
   r.Default(http.FileServer(http.Dir(".")))
 
   // create the server
   server := &http.Server{
-    Addr:    "localhost:8000",
+    Addr:    ":12001",
     Handler: r,
   }
   // listen for SIGKILL
