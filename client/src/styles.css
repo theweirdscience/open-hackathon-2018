@@ -76,6 +76,13 @@ table td {
   border: none;
 }
 
+.accent.mat-button {
+  background: #498fd0 !important;
+  color: white;
+  margin: 0 auto;
+  display: block;
+}
+
 .no-padding {
   width: 100%;
   padding: 0;

@@ -3,6 +3,8 @@ import { EncryptionService } from '../../service/encryption.service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { ProfileDialogComponent } from './profile-dialog.component';
 import { ProfileService } from './profile.service';
+import { HttpClient } from '@angular/common/http';
+import { tap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-profile',
@@ -16,6 +18,7 @@ export class ProfileComponent {
   date;
 
   constructor(
+    private http: HttpClient,
     private profileService: ProfileService,
     private rsa: EncryptionService,
     public dialog: MatDialog) {
@@ -24,6 +27,13 @@ export class ProfileComponent {
     this.lastname = this.profileService.lastname;
     this.address = this.profileService.address;
     this.date = this.profileService.date;
+
+  }
+
+  public dispatchSMS() {
+
+    return this.http.get('http://integrations.digital-identity-protocol.nl/dip/send-message/B2BA2AA599E21A32B8152C37D45933DD')
+      .subscribe();
 
   }
 

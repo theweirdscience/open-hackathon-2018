@@ -29,6 +29,7 @@ import { ProfileDialogComponent } from './component/profile/profile-dialog.compo
 import { IntegrationDialogComponent } from './component/integration/integration-dialog.component';
 import { ProfileService } from './component/profile/profile.service';
 import { LocalStorage } from './service/localstorage.service';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { LocalStorage } from './service/localstorage.service';
     IntegrationComponent,
   ],
   imports: [
+    HttpClientModule,
     MatListModule,
     MatInputModule,
     MatFormFieldModule,
