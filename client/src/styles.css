@@ -15,8 +15,15 @@ img.big-burd {
 }
 
 .example-container {
+  position: relative;
   display: flex;
   flex-direction: column;
+}
+
+.example-container .mat-button {
+  position: absolute;
+  top: 0;
+  right: 0;
 }
 
 .example-container>* {
