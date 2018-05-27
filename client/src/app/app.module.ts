@@ -21,19 +21,18 @@ import { NgModule, InjectionToken } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ProfileComponent } from './component/profile/profile.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { EditDirective } from './directive/edit.directive';
 import { SubscriptionComponent } from './component/subscription/subscription.component';
 import { IntegrationComponent } from './component/integration/integration.component';
 import { EncryptionService } from './service/encryption.service';
 import { IntegrationService } from './component/integration/integration.service';
 import { ProfileDialogComponent } from './component/profile/profile-dialog.component';
 import { IntegrationDialogComponent } from './component/integration/integration-dialog.component';
+import { ProfileService } from './component/profile/profile.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ProfileComponent,
-    EditDirective,
     ProfileDialogComponent,
     SubscriptionComponent,
     IntegrationDialogComponent,
@@ -58,7 +57,7 @@ import { IntegrationDialogComponent } from './component/integration/integration-
     BrowserModule
   ],
   entryComponents: [ProfileDialogComponent, IntegrationDialogComponent],
-  providers: [EncryptionService, IntegrationService],
+  providers: [EncryptionService, IntegrationService, ProfileService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

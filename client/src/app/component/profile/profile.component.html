@@ -7,10 +7,9 @@
     <button mat-button (click)="openDialog()">
       <mat-icon> edit </mat-icon>
     </button>
-    <mat-list-item role="listitem"> Firstname: Big </mat-list-item>
-    <mat-list-item role="listitem"> Lastname: Bird </mat-list-item>
-    <mat-list-item role="listitem"> Address: Sesame Street </mat-list-item>
-    <mat-list-item role="listitem"> City: Manhatten </mat-list-item>
+    <mat-list-item role="listitem"> {{ firstname }} {{ lastname }} </mat-list-item>
+    <mat-list-item role="listitem"> {{ address }} </mat-list-item>
+    <mat-list-item role="listitem"> {{ city }} </mat-list-item>
   </mat-list>
 
 </div>
