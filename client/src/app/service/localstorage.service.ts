@@ -26,7 +26,17 @@ export class LocalStorage {
 
   }
 
-  private updateDB(items: any) {
+  public getDB() {
+
+    if (this.db) {
+
+      return JSON.parse(this.db);
+
+    }
+
+  }
+
+  public updateDB(items: any) {
 
     this.items.push(items);
 

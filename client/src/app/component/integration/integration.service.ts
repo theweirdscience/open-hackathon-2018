@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of, from, BehaviorSubject, Subject } from 'rxjs';
 import { tap, map, scan } from 'rxjs/operators';
+import { LocalStorage } from '../../service/localstorage.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { tap, map, scan } from 'rxjs/operators';
 export class IntegrationService {
 
   public intergrationsPossibilities: Observable<any[]>;
-  selectedServices: any = [];
+  selectedServices;
 
   private integrations = [
     {
@@ -31,9 +32,11 @@ export class IntegrationService {
     }
   ];
 
-  constructor() {
+  constructor(private localStorage: LocalStorage) {
 
     this.intergrationsPossibilities = of(this.integrations);
+
+    this.selectedServices = this.localStorage.getDB() || [];
 
   }
 
