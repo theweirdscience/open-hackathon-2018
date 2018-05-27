@@ -20,17 +20,16 @@ export class ProfileComponent {
     private rsa: EncryptionService,
     public dialog: MatDialog) {
 
-    this.firstname = 'Big';
-    this.lastname = 'Bird';
-    this.address = 'Sesame street';
-    this.city = 'Manhatten';
+    this.firstname = this.profileService.firstname || 'Big';
+    this.lastname = this.profileService.lastname || 'Bird';
+    this.address = this.profileService.address || 'Sesame street';
+    this.city = this.profileService.city || 'Manhatten';
 
   }
 
   openDialog(): void {
     this.dialog.open(ProfileDialogComponent, {
-      width: '400px',
-      data: { name: 'some name', animal: 'tiger' }
+      width: '400px'
     });
   }
 

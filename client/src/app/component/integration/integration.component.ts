@@ -21,8 +21,7 @@ export class IntegrationComponent {
 
   openDialog(): void {
     this.dialog.open(IntegrationDialogComponent, {
-      width: '400px',
-      data: { name: 'some name', animal: 'tiger' }
+      width: '400px'
     });
   }
 

@@ -6,8 +6,12 @@ import { MAT_DIALOG_DATA } from '@angular/material';
 })
 export class ProfileDialogComponent {
 
-  constructor(
-    @Inject(MAT_DIALOG_DATA) public data: any) {
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any) { }
+
+  setNewValue(value) {
+
+    console.log('val', value);
+
   }
 
 }

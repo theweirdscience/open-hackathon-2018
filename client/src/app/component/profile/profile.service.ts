@@ -7,6 +7,11 @@ import { tap, map, scan } from 'rxjs/operators';
 })
 export class ProfileService {
 
+  firstname;
+  lastname;
+  address;
+  city;
+
   constructor() {
 
     this.firstname = '';
