@@ -20,14 +20,14 @@ export class IntegrationService {
     {
       service: 'politie',
       label: 'Politie',
-      image: 'https://seeklogo.com/images/P/Politie-logo-269952DA5A-seeklogo.com.png',
+      image: 'http://gtalogo.com/img/8379.png',
       url: 'politie url'
     },
     {
-      service: 'kadester',
-      label: 'Kadester',
-      image: 'https://yt3.ggpht.com/a-/AJLlDp1aFV3E5R1dHen8Vph5n47AZc8Ujl5hglhF0Q=s900-mo-c-c0xffffffff-rj-k-no',
-      url: 'kadester url'
+      service: 'KPN',
+      label: 'KPN',
+      image: 'https://www.consumentenbond.nl/binaries/content/gallery/cbhippowebsite/tests/alles-in-1/afbeeldingen-oud/kpn-logo.jpg/kpn-logo.jpg/cbhippowebsite%3Aplcl',
+      url: 'KPN url'
     }
   ];
 

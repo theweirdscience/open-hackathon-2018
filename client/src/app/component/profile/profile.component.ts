@@ -13,24 +13,23 @@ export class ProfileComponent {
   firstname;
   lastname;
   address;
-  city;
+  date;
 
   constructor(
     private profileService: ProfileService,
     private rsa: EncryptionService,
     public dialog: MatDialog) {
 
-    this.firstname = 'Big';
-    this.lastname = 'Bird';
-    this.address = 'Sesame street';
-    this.city = 'Manhatten';
+    this.firstname = this.profileService.firstname;
+    this.lastname = this.profileService.lastname;
+    this.address = this.profileService.address;
+    this.date = this.profileService.date;
 
   }
 
   openDialog(): void {
     this.dialog.open(ProfileDialogComponent, {
-      width: '400px',
-      data: { name: 'some name', animal: 'tiger' }
+      width: '400px'
     });
   }
 

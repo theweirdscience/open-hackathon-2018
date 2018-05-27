@@ -7,12 +7,17 @@ import { tap, map, scan } from 'rxjs/operators';
 })
 export class ProfileService {
 
+  firstname;
+  lastname;
+  address;
+  date;
+
   constructor() {
 
-    this.firstname = '';
-    this.lastname = '';
-    this.address = '';
-    this.city = '';
+    this.firstname = this.firstname || 'Big';
+    this.lastname = this.lastname || 'Bird';
+    this.address = this.address || '123 Sesame street, Manhatten, New York';
+    this.date = this.date || 'November 10, 1968';
 
   }
 
