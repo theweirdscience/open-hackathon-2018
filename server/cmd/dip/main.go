@@ -1,14 +1,14 @@
 package main
 
 import (
-	"crypto/sha256"
-	"io/ioutil"
-	"net/http"
-	"os"
-	"os/signal"
+  "crypto/sha256"
+  "io/ioutil"
+  "net/http"
+  "os"
+  "os/signal"
 
-	"github.com/theweirdscience/open-hackathon-2018/server/cmd/dip/internal/middleware"
-	"github.com/theweirdscience/open-hackathon-2018/server/lib/routing"
+  "github.com/theweirdscience/open-hackathon-2018/server/lib/middleware"
+  "github.com/theweirdscience/open-hackathon-2018/server/lib/routing"
   "github.com/whitecypher/logr"
   "time"
   "context"
@@ -22,20 +22,24 @@ type Hash string
 type PublicKey string
 
 type Attribute struct {
-	Key   string
-	Value string
+  Name  string `json:"name"`
+  Value string `json:"value"`
 }
 
 type Integration struct {
+  Name string `json:"name"`
+  URL  string `json:"url"`
 }
 
 type Subscription struct {
+  SubscriberID string `json:"subscriber_id"`
+  Attribute    string `json:"attribute"`
 }
 
 type Profile struct {
-	Attributes    []Attribute    `json:"attributes"`
-	Subscriptions []Subscription `json:"subscriptions,omitempty"`
-	Integrations  []Integration  `json:"integrations,omitempty"`
+  Attributes    []Attribute    `json:"attributes"`
+  Subscriptions []Subscription `json:"subscriptions,omitempty"`
+  Integrations  []Integration  `json:"integrations,omitempty"`
 }
 
 type PrivateMap map[Hash]Profile
@@ -47,38 +51,34 @@ func (m PrivateMap) Filter(h Hash) PrivateMap {
 }
 
 type Data struct {
-	Custodian Hash             `json:"custodian"`
-	Public    Profile          `json:"public"`
-	Private   PrivateMap `json:"private"`
+  Custodian Hash       `json:"custodian"`
+  Public    Profile    `json:"public"`
+  Private   PrivateMap `json:"private"`
 }
 
 var (
-	keys = map[Hash]PublicKey{}
-	data = map[Hash]Data{}
+  keys = map[Hash]PublicKey{}
+  data = map[Hash]Data{}
 )
 
 func Last(parts []string) string {
-  return 
+  return parts[len(parts)-1]
 }
 
 func main() {
   logr.Output(logr.All, os.Stdout)
 
-	r := routing.New()
-	r.Middleware(
-		middleware.LogDuration(),
-		middleware.LogAccess(),
-	)
+  r := routing.New()
+  r.Middleware(
+    middleware.LogDuration(),
+    middleware.LogAccess(),
+  )
 
-	r.HandleFunc("/data/*", func(w http.ResponseWriter, r *http.Request) {
-	  var owner Hash
-	  var requester Hash
+  r.HandleFunc("/data/*", func(w http.ResponseWriter, r *http.Request) {
+    owner := Hash(strings.SplitN(r.Host, ".", -1)[0])
+    requester := Hash(Last(strings.SplitN(r.URL.Path, "/", -1)))
 
-	  owner = Hash(strings.SplitN(r.Host, ".", -1)[0])
-	  requester = Hash(Last(strings.SplitN(r.URL.Path, "/", -1)))
-
-
-		if r.Method == http.MethodPut {
+    if r.Method == http.MethodPut {
       js, err := ioutil.ReadAll(r.Body)
       defer r.Body.Close()
       if err != nil {
@@ -95,58 +95,69 @@ func main() {
       }
       data[owner] = d
       w.WriteHeader(http.StatusOK)
-		}
-		if r.Method == http.MethodGet {
-		  d := Data{
-		    Custodian: owner,
-		    Public: data[owner].Public,
-		    Private: data[owner].Private.Filter(requester),
+    }
+    if r.Method == http.MethodGet {
+      d := Data{
+        Custodian: owner,
+        Public:    data[owner].Public,
+        Private:   data[owner].Private.Filter(requester),
       }
-		  js, err := json.Marshal(d)
-		  if err != nil {
+      js, err := json.Marshal(d)
+      if err != nil {
         logr.Error(err)
         w.WriteHeader(http.StatusInternalServerError)
         return
       }
       w.Write(js)
-		}
-	})
+    }
+  })
 
-	r.HandleFunc("/hash", func(w http.ResponseWriter, r *http.Request) {
-	  r.ParseForm()
-		if r.Method == http.MethodPut {
-			data, err := ioutil.ReadAll(r.Body)
+  r.HandleFunc("/hash", func(w http.ResponseWriter, r *http.Request) {
+    r.ParseForm()
+    if r.Method == http.MethodPut {
+      data, err := ioutil.ReadAll(r.Body)
       defer r.Body.Close()
-			if err != nil {
+      if err != nil {
         logr.Error(err)
-				w.WriteHeader(http.StatusBadRequest)
-				return
-			}
-			hash := sha256.Sum256(data)
-			w.Write([]byte(hex.EncodeToString(hash[:])))
-		}
-	})
+        w.WriteHeader(http.StatusBadRequest)
+        return
+      }
+      hash := sha256.Sum256(data)
+      h := Hash(hex.EncodeToString(hash[:]))
+      keys[h] = PublicKey(data)
+      w.Write([]byte(h))
+    }
+  })
 
-	r.Default(http.FileServer(http.Dir(".")))
+  r.HandleFunc("/key", func(w http.ResponseWriter, r *http.Request) {
+    owner := Hash(strings.SplitN(r.Host, ".", -1)[0])
+    if key, ok := keys[owner]; ok {
+      w.Write([]byte(key))
+      return
+    }
+    w.WriteHeader(http.StatusNotFound)
+  })
 
-	// create the server
-	server := &http.Server{
-		Addr:    "localhost:8000",
-		Handler: r,
-	}
+  r.Default(http.FileServer(http.Dir(".")))
 
-	// listen for SIGKILL
-	sig := make(chan os.Signal, 1)
-	errChan := make(chan error, 1)
-	signal.Notify(sig, os.Interrupt)
+  // create the server
+  server := &http.Server{
+    Addr:    "localhost:8000",
+    Handler: r,
+  }
 
-	go func() {
-		// start server
+  // listen for SIGKILL
+  sig := make(chan os.Signal, 1)
+  errChan := make(chan error, 1)
+  signal.Notify(sig, os.Interrupt)
+
+  go func() {
+    // start server
     logr.Infof("starting web server on '%s'", server.Addr)
-		errChan <- server.ListenAndServe()
-	}()
+    errChan <- server.ListenAndServe()
+  }()
 
-	var err error
+  var err error
   select {
   case <-sig:
     // shutdown the server
@@ -165,9 +176,9 @@ func main() {
     // nothing to do
   }
 
-	if err != nil {
+  if err != nil {
     logr.Error(err)
-	}
+  }
 
-	time.Sleep(time.Second)
+  time.Sleep(time.Second)
 }

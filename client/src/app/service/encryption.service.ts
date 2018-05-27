@@ -6,17 +6,33 @@ declare const cryptico: any;
   providedIn: 'root'
 })
 export class EncryptionService {
+  privateKey :string;
+
+  publicKey :string;
 
   constructor() {
-
     const somePassphrase = 'The Moon is a Harsh Mistress.';
+  }
 
-    const privateKey = cryptico.generateRSAKey(somePassphrase, 512);
+  restoreKeys(passphrase: string) {
+    this.privateKey = cryptico.generateRSAKey(passphrase, 512);
+    this.publicKey = cryptico.publicKeyString(this.privateKey);
+  }
 
-    const publicKey = cryptico.publicKeyString(privateKey);
+  getPublicKey() :string {
+    return this.publicKey;
+  }
 
-    console.log(publicKey);
+  getPrivateKey() :string {
+    return this.privateKey;
+  }
 
+  encrypt(data :string, publicKey :string) {
+    return cryptico.encrypt(data, publicKey);
+  }
+
+  decrypt(data :string, privateKey :string) {
+    return cryptico.decrypt(data, privateKey);
   }
 
 }
