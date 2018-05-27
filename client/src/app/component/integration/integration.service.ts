@@ -22,6 +22,12 @@ export class IntegrationService {
       label: 'Politie',
       image: 'http://gtalogo.com/img/8379.png',
       url: 'politie url'
+    },
+    {
+      service: 'KPN',
+      label: 'KPN',
+      image: 'https://www.consumentenbond.nl/binaries/content/gallery/cbhippowebsite/tests/alles-in-1/afbeeldingen-oud/kpn-logo.jpg/kpn-logo.jpg/cbhippowebsite%3Aplcl',
+      url: 'KPN url'
     }
   ];
 
