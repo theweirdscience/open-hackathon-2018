@@ -587,10 +587,23 @@ var __metadata = (undefined && undefined.__metadata) || function (k, v) {
 var EncryptionService = /** @class */ (function () {
     function EncryptionService() {
         var somePassphrase = 'The Moon is a Harsh Mistress.';
-        var privateKey = cryptico.generateRSAKey(somePassphrase, 512);
-        var publicKey = cryptico.publicKeyString(privateKey);
-        console.log(publicKey);
     }
+    EncryptionService.prototype.restoreKeys = function (passphrase) {
+        this.privateKey = cryptico.generateRSAKey(passphrase, 512);
+        this.publicKey = cryptico.publicKeyString(this.privateKey);
+    };
+    EncryptionService.prototype.getPublicKey = function () {
+        return this.publicKey;
+    };
+    EncryptionService.prototype.getPrivateKey = function () {
+        return this.privateKey;
+    };
+    EncryptionService.prototype.encrypt = function (data, publicKey) {
+        return cryptico.encrypt(data, publicKey);
+    };
+    EncryptionService.prototype.decrypt = function (data, privateKey) {
+        return cryptico.decrypt(data, privateKey);
+    };
     EncryptionService = __decorate([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])({
             providedIn: 'root'
