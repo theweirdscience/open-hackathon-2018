@@ -35,7 +35,14 @@ export class IntegrationDialogComponent {
           }
 
         });
+
     }
+
+  }
+
+  public updateSelected(thingy) {
+
+    return this.integrationService.selectedServices.includes(thingy);
 
   }
 
