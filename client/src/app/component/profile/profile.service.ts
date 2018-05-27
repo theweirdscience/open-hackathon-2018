@@ -10,14 +10,14 @@ export class ProfileService {
   firstname;
   lastname;
   address;
-  city;
+  date;
 
   constructor() {
 
     this.firstname = '';
     this.lastname = '';
     this.address = '';
-    this.city = '';
+    this.date = '';
 
   }
 

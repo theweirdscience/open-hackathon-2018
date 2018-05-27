@@ -13,7 +13,7 @@ export class ProfileComponent {
   firstname;
   lastname;
   address;
-  city;
+  date;
 
   constructor(
     private profileService: ProfileService,
@@ -22,8 +22,8 @@ export class ProfileComponent {
 
     this.firstname = this.profileService.firstname || 'Big';
     this.lastname = this.profileService.lastname || 'Bird';
-    this.address = this.profileService.address || 'Sesame street';
-    this.city = this.profileService.city || 'Manhatten';
+    this.address = this.profileService.address || '123 Sesame street, Manhatten, New York';
+    this.date = this.profileService.date || 'November 10, 1968';
 
   }
 

@@ -1,4 +1,11 @@
 <h4> Available integrations </h4>
-<div *ngFor="let integration of integrations | async">
-    {{integration.label}} <mat-slide-toggle [checked]="updateSelected(integration)" (change)="setSelected(integration, $event.checked)" [color]="primary"></mat-slide-toggle>
-</div>
+<table class="no-padding">
+  <tr *ngFor="let integration of integrations | async">
+    <td>
+      {{integration.label}}
+    </td>
+    <td>
+      <mat-slide-toggle [checked]="updateSelected(integration)" (change)="setSelected(integration, $event.checked)" [color]="primary"></mat-slide-toggle>
+    </td>
+  </tr>
+</table>

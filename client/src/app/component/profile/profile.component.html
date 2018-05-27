@@ -4,12 +4,21 @@
   />
 
   <mat-list role="list">
+    <H1>{{ firstname }} {{ lastname }} </H1>
     <button class="edit" mat-button (click)="openDialog()">
       <mat-icon> edit </mat-icon>
     </button>
-    <mat-list-item role="listitem"> {{ firstname }} {{ lastname }} </mat-list-item>
-    <mat-list-item role="listitem"> {{ address }} </mat-list-item>
-    <mat-list-item role="listitem"> {{ city }} </mat-list-item>
+    <table>
+      <tr>
+        <td>Date of birth</td>
+        <td>{{ date }}</td>
+      </tr>
+      <tr>
+        <td>Address</td>
+        <td>{{ address }}</td>
+      </tr>
+    </table>
+    <mat-list-item role="listitem"> </mat-list-item>
   </mat-list>
 
 </div>

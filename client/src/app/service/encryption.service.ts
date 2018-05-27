@@ -6,7 +6,6 @@ declare const cryptico: any;
   providedIn: 'root'
 })
 export class EncryptionService {
-
   privateKey: string;
 
   publicKey: string;
