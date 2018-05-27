@@ -28,6 +28,7 @@ import { IntegrationService } from './component/integration/integration.service'
 import { ProfileDialogComponent } from './component/profile/profile-dialog.component';
 import { IntegrationDialogComponent } from './component/integration/integration-dialog.component';
 import { ProfileService } from './component/profile/profile.service';
+import { LocalStorage } from './service/localstorage.service';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,7 @@ import { ProfileService } from './component/profile/profile.service';
     BrowserModule
   ],
   entryComponents: [ProfileDialogComponent, IntegrationDialogComponent],
-  providers: [EncryptionService, IntegrationService, ProfileService],
+  providers: [EncryptionService, IntegrationService, ProfileService, LocalStorage],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
