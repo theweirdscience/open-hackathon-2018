@@ -1,6 +1,7 @@
 import { Component, Inject, OnDestroy } from '@angular/core';
 import { MAT_DIALOG_DATA } from '@angular/material';
 import { IntegrationService } from './integration.service';
+import { LocalStorage } from '../../service/localstorage.service';
 
 @Component({
   templateUrl: 'integration-dialog.component.html'
@@ -10,6 +11,7 @@ export class IntegrationDialogComponent {
   public integrations;
 
   constructor(
+    private localStorage: LocalStorage,
     private integrationService: IntegrationService,
     @Inject(MAT_DIALOG_DATA) public data: any) {
 
@@ -37,6 +39,8 @@ export class IntegrationDialogComponent {
         });
 
     }
+
+    this.localStorage.updateDB(this.integrationService.selectedServices);
 
   }
 

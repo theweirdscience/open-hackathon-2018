@@ -5,11 +5,18 @@ import { Injectable } from '@angular/core';
 })
 export class LocalStorage {
 
+  db;
   items = [];
 
   constructor() {
 
-    window.localStorage.setItem('db', JSON.stringify(this.items));
+    this.db = window.localStorage.getItem('db');
+
+    if (!this.db) {
+
+      this.db = window.localStorage.setItem('db', JSON.stringify(this.items));
+
+    }
 
   }
 
@@ -19,10 +26,21 @@ export class LocalStorage {
 
   }
 
-  private updateDB() {
+  public getDB() {
 
-    this.clearDB();
-    window.localStorage.setItem('db', JSON.stringify(this.items));
+    if (this.db) {
+
+      return JSON.parse(this.db);
+
+    }
+
+  }
+
+  public updateDB(items: any) {
+
+    this.items.push(items);
+
+    window.localStorage.setItem('db', JSON.stringify(items));
 
   }
 

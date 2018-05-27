@@ -8,76 +8,74 @@ h2 {
   font-weight: 100;
 }
 
-section {
-  padding: 5rem 10rem;
-  border-bottom: 1px solid #eee;
+@media screen and (min-width: 768px) {
+  section {
+    padding: 5rem 10rem;
+    border-bottom: 1px solid #eee;
+  }
+  img.big-burd {
+    width: 250px;
+    height: 250px;
+    float: left;
+    border-radius: 50%;
+    padding: 3px;
+    border: 1px solid lightgray;
+  }
+  .example-container {
+    position: relative;
+    flex-direction: column;
+    overflow: auto;
+  }
+  img {
+    border: 1px solid lightgrey;
+    border-radius: 50%;
+    margin-right: 10px;
+    padding: 5px;
+  }
+  h1 {
+    font-weight: 100;
+    display: block;
+    font-size: 50px;
+    padding: 0 0 0 279px;
+    margin: 0;
+  }
+  .test {
+    margin: 10px;
+    display: inline-block !important;
+  }
+  .circle img {
+    padding: 10px;
+    height: 50px;
+    display: inline-block;
+    border: 1px solid lightgrey;
+    border-radius: 50%;
+  }
+  .example-container .edit {
+    color: lightgray;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .example-container>* {
+    width: 100%;
+  }
+  table {
+    width: 50%;
+    padding: 2rem;
+  }
+  table td {
+    border: none;
+  }
+  .no-padding {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
 }
 
-img.big-burd {
-  width: 250px;
-  height: 250px;
-  float: left;
-  border-radius: 50%;
-  padding: 3px;
-  border: 1px solid lightgray;
-}
-
-.example-container {
-  position: relative;
-  flex-direction: column;
-  overflow: auto;
-}
-
-img {
-  border: 1px solid lightgrey;
-  border-radius: 50%;
-  margin-right: 10px;
-  padding: 5px;
-}
-
-h1 {
-  font-weight: 100;
+.accent.mat-button {
+  background: #498fd0 !important;
+  color: white;
+  margin: 0 auto;
   display: block;
-  font-size: 50px;
-  padding: 0 0 0 279px;
-  margin: 0;
-}
-
-.test {
-  margin: 10px;
-  display: inline-block !important;
-}
-
-.circle img {
-  padding: 10px;
-  height: 50px;
-  display: inline-block;
-  border: 1px solid lightgrey;
-  border-radius: 50%;
-}
-
-.example-container .edit {
-  color: lightgray;
-  position: absolute;
-  top: 0;
-  right: 0;
-}
-
-.example-container>* {
-  width: 100%;
-}
-
-table {
-  width: 50%;
-  padding: 2rem;
-}
-
-table td {
-  border: none;
-}
-
-.no-padding {
-  width: 100%;
-  padding: 0;
-  margin: 0;
 }
