@@ -2,19 +2,19 @@
 <div class="example-container">
 
   <mat-form-field>
-    <input matInput placeholder="Firstname">
+    <input matInput [value]="firstname" placeholder="Firstname">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Lastname">
+    <input matInput [value]="lastname" placeholder="Lastname">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Address">
+    <input matInput [value]="address" placeholder="Address">
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput (change)="setNewValue($event.value)" placeholder="City">
+    <input matInput [value]="date" (change)="setNewValue($event.value)" placeholder="date">
   </mat-form-field>
 
   <button mat-button [mat-dialog-close]="true">Yes</button>

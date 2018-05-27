@@ -20,10 +20,10 @@ export class ProfileComponent {
     private rsa: EncryptionService,
     public dialog: MatDialog) {
 
-    this.firstname = this.profileService.firstname || 'Big';
-    this.lastname = this.profileService.lastname || 'Bird';
-    this.address = this.profileService.address || '123 Sesame street, Manhatten, New York';
-    this.date = this.profileService.date || 'November 10, 1968';
+    this.firstname = this.profileService.firstname;
+    this.lastname = this.profileService.lastname;
+    this.address = this.profileService.address;
+    this.date = this.profileService.date;
 
   }
 
