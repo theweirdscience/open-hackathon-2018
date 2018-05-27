@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 
 declare const cryptico: any;
 
@@ -6,9 +6,10 @@ declare const cryptico: any;
   providedIn: 'root'
 })
 export class EncryptionService {
-  privateKey :string;
 
-  publicKey :string;
+  privateKey: string;
+
+  publicKey: string;
 
   constructor() {
     const somePassphrase = 'The Moon is a Harsh Mistress.';
@@ -19,19 +20,19 @@ export class EncryptionService {
     this.publicKey = cryptico.publicKeyString(this.privateKey);
   }
 
-  getPublicKey() :string {
+  getPublicKey(): string {
     return this.publicKey;
   }
 
-  getPrivateKey() :string {
+  getPrivateKey(): string {
     return this.privateKey;
   }
 
-  encrypt(data :string, publicKey :string) {
+  encrypt(data: string, publicKey: string) {
     return cryptico.encrypt(data, publicKey);
   }
 
-  decrypt(data :string, privateKey :string) {
+  decrypt(data: string, privateKey: string) {
     return cryptico.decrypt(data, privateKey);
   }
 
