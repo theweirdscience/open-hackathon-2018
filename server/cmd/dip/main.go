@@ -72,6 +72,7 @@ func main() {
   r.Middleware(
     middleware.LogDuration(),
     middleware.LogAccess(),
+    middleware.AllowCORS(),
   )
 
   r.HandleFunc("/data/*", func(w http.ResponseWriter, r *http.Request) {
@@ -142,7 +143,7 @@ func main() {
 
   // create the server
   server := &http.Server{
-    Addr:    ":80",
+    Addr:    ":12000",
     Handler: r,
   }
 

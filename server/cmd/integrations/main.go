@@ -133,6 +133,49 @@ func ExtractAttributes(data Data, key rsa.PrivateKey) []Attribute {
   return attributes
 }
 
+func resolveApiToken() string {
+  token := ""
+
+  var postBody = []byte(`client_id=tzJ6gZ0g53p5qfz1WQJZR90Z0VHEjhaV&client_secret=3fp9ykmhYSjy8GIj`)
+  req, err := http.NewRequest("POST", "https://api-prd.kpn.com/oauth/client_credential/accesstoken?grant_type=client_credentials", bytes.NewBuffer(postBody))
+  req.Header.Set("Content-Type", "application/x-www-form-urlencoded")
+
+  client := &http.Client{}
+  resp, err := client.Do(req)
+  if err != nil {
+    logr.Error(err)
+    return ""
+  }
+  defer resp.Body.Close()
+
+  logr.Info("response Status:", resp.Status)
+  logr.Info("response Headers:", resp.Header)
+  body, _ := ioutil.ReadAll(resp.Body)
+  logr.Info("response Body:", string(body))
+
+  data := map[string]interface{}{}
+  err = json.Unmarshal(body, &data)
+  if err != nil {
+    logr.Error(err)
+    return ""
+  }
+
+  v, ok := data["access_token"]
+  if !ok {
+    logr.Error("access_token not present")
+    return ""
+  }
+
+  if token, ok = v.(string); !ok {
+    logr.Error("access_token not a string")
+    return ""
+  }
+
+  logr.Infof("access token is %v\n", token)
+
+  return token
+}
+
 func main() {
   logr.Output(logr.All, os.Stdout)
 
@@ -165,15 +208,19 @@ func main() {
   r.HandleFunc("/dip/send-message/*", func(w http.ResponseWriter, r *http.Request) {
     //recipient := Hash(Last(strings.SplitN(r.URL.Path, "/", -1)))
 
+    apiToken := resolveApiToken()
+
     var jsonStr = []byte(`{"messages": [{"content": "Hi Big Bird!","mobile_number": "+31636164164"}],"sender": "Digital Identity Platform Integration"}`)
     req, err := http.NewRequest("POST", "https://api-prd.kpn.com/messaging/sms-kpn/v1/send", bytes.NewBuffer(jsonStr))
-    req.Header.Set("Authorization", "BearerToken qKlWVXAEI1l56Gw1qGx3UfL3TjNy")
+    req.Header.Set("Authorization", fmt.Sprintf("BearerToken %v", apiToken))
     req.Header.Set("Content-Type", "application/json")
 
     client := &http.Client{}
     resp, err := client.Do(req)
     if err != nil {
-      panic(err)
+      logr.Error(err)
+      w.WriteHeader(http.StatusInternalServerError)
+      return
     }
     defer resp.Body.Close()
 
