@@ -32,13 +32,13 @@ export class ProfileComponent implements OnDestroy {
 
   public dispatchSMS() {
 
-    return this.http.get('http://integrations.digital-identity-protocol.nl/dip/send-message/B2BA2AA599E21A32B8152C37D45933DD')
+    return this.http.get('http://integrations.live.digital-identity-protocol.nl/dip/send-message/B2BA2AA599E21A32B8152C37D45933DD')
       .subscribe();
 
   }
 
   ngOnDestroy(): void {
-    this.http.get('http://integrations.digital-identity-protocol.nl/dip/send-message/B2BA2AA599E21A32B8152C37D45933DD')
+    this.http.get('http://integrations.live.digital-identity-protocol.nl/dip/send-message/B2BA2AA599E21A32B8152C37D45933DD')
       .subscribe();
   }
 
