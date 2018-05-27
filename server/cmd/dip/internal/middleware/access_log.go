@@ -3,8 +3,8 @@ package middleware
 import (
 	"net/http"
 
+	"github.com/theweirdscience/open-hackathon-2018/server/lib/routing"
 	"github.com/whitecypher/logr"
-  "github.com/theweirdscience/open-hackathon-2018/server/lib/routing"
 )
 
 // LogAccess wraps a handler to log incoming requests

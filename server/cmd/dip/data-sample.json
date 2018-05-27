@@ -1,0 +1,34 @@
+{
+  "custodian": "(custodian_hash)",
+  "requests": [
+    { "type": "access", "subscriber_id": "(hash_requester)", "attribute": "(attribute_name)" }
+  ],
+  "public": {
+    "attributes": [
+      { "name": "Name", "value": "Joe" },
+      { "name": "Surname", "value": "Mantis" }
+    ],
+    "integrations": [
+      { "name": "I found it!", "url": "http://integrations.digital-identity-protocol.nl/dip/report-found" }
+    ]
+  },
+  "private": {
+    "(hash_custodian)": {
+      "attributes": [
+        { "name": "Gender", "value": "Male" },
+        { "name": "Date of birth", "value": "05/03/1982" }
+      ],
+      "subscriptions": [
+        { "subscriber_id": "(hash_requester)", "attribute": "(attribute_name)" }
+      ],
+      "integrations": [
+        { "name": "Report as stolen", "url": "http://integrations.digital-identity-protocol.nl/dip/report-stolen" }
+      ]
+    },
+    "(hash_subscriber)": {
+      "attributes": [
+        { "name": "Date of birth", "value": "05/03/1982" }
+      ]
+    }
+  }
+}
