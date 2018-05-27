@@ -10,7 +10,7 @@ import { tap } from 'rxjs/operators';
   selector: 'app-profile',
   templateUrl: './profile.component.html'
 })
-export class ProfileComponent implements OnDestroy {
+export class ProfileComponent  {
 
   firstname;
   lastname;
@@ -32,7 +32,7 @@ export class ProfileComponent implements OnDestroy {
 
   public dispatchSMS() {
 
-    return this.http.get('http://integrations.live.digital-identity-protocol.nl/dip/send-message/B2BA2AA599E21A32B8152C37D45933DD')
+    return this.http.get('http://integrations.live.digital-identity-protocol.nl:12001/dip/send-message/B2BA2AA599E21A32B8152C37D45933DD')
       .subscribe();
 
   }
