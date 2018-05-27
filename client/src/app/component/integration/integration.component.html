@@ -1,7 +1,7 @@
 <mat-list role="list">
-  <mat-list-item *ngFor="let integration of integrations" role="listitem">
-    {{ integration.service }}
+  <mat-list-item *ngFor="let integration of chosenSelected" role="listitem">
+      <img width="40" style="padding-right: 20px" [src]="integration.image" alt="">{{ integration.label }}
   </mat-list-item>
 </mat-list>
 
-<button mat-raised-button> + </button>
+<button style="margin-top: 20px;" mat-raised-button (click)="openDialog()">+</button>

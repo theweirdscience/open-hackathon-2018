@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject, AfterViewChecked, OnChanges } from '@angular/core';
+import { IntegrationService } from './integration.service';
+import { MAT_DIALOG_DATA, MatDialog } from '@angular/material';
+import { IntegrationDialogComponent } from './integration-dialog.component';
 
 @Component({
   selector: 'app-integration',
@@ -6,22 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IntegrationComponent {
 
-  public integrations: any;
+  chosenSelected: any;
 
-  constructor() {
+  constructor(
+    private integrationService: IntegrationService,
+    public dialog: MatDialog) {
 
-    this.integrations = [
-      {
-        service: 'kpn',
-      },
-      {
-        service: 'politie'
-      },
-      {
-        service: 'Kadester'
-      }
-    ];
+    this.chosenSelected = this.integrationService.selectedServices;
 
+  }
+
+  openDialog(): void {
+    this.dialog.open(IntegrationDialogComponent, {
+      width: '400px',
+      data: { name: 'some name', animal: 'tiger' }
+    });
   }
 
 }

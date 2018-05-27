@@ -1,0 +1,4 @@
+<h4> Available integrations </h4>
+<div *ngFor="let integration of integrations | async">
+    {{integration.label}} <mat-slide-toggle (change)="setSelected(integration, $event.checked)" [color]="primary"></mat-slide-toggle>
+</div>
